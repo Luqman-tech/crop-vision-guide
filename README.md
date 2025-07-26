@@ -6,6 +6,12 @@
 
 **Solution**: AI-powered crop disease detection system with offline capability for use in low-connectivity areas.
 
+## 🌐 Live Demo
+
+**🚀 Deployed Application**: [https://cropcareaivisionguide.netlify.app/](https://cropcareaivisionguide.netlify.app/)
+
+Experience the full application with AI-powered crop disease detection, camera functionality, and offline capabilities.
+
 ## 🏗️ Project Architecture
 
 This project consists of two main components:
