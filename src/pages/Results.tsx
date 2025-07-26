@@ -106,47 +106,13 @@ const Results = () => {
     }
   };
 
-  const [showExpertModal, setShowExpertModal] = useState(false);
-  const [expertMessage, setExpertMessage] = useState("");
-  const [expertSent, setExpertSent] = useState(false);
+
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
       {/* Ask an Expert Modal */}
-      {showExpertModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-          <div className="bg-white rounded-xl shadow-xl p-6 w-full max-w-xs flex flex-col items-center relative">
-            <button onClick={() => setShowExpertModal(false)} className="absolute top-2 right-2 text-gray-500 hover:text-red-600">✕</button>
-            <h2 className="text-lg font-bold text-green-800 mb-2">Ask an Expert</h2>
-            {expertSent ? (
-              <div className="text-green-700 text-center">Your question has been sent! An expert will respond soon.</div>
-            ) : (
-              <form
-                onSubmit={e => {
-                  e.preventDefault();
-                  setExpertSent(true);
-                  setTimeout(() => {
-                    setShowExpertModal(false);
-                    setExpertSent(false);
-                    setExpertMessage("");
-                  }, 2000);
-                }}
-                className="w-full flex flex-col gap-3"
-              >
-                <textarea
-                  className="w-full rounded-lg border border-green-200 px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-green-400 bg-white"
-                  rows={3}
-                  placeholder="Describe your question or concern for the expert..."
-                  value={expertMessage}
-                  onChange={e => setExpertMessage(e.target.value)}
-                  required
-                />
-                <Button type="submit" className="w-full py-2 rounded-lg mt-2">Send to Expert</Button>
-              </form>
-            )}
-          </div>
-        </div>
-      )}
+
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-green-100 sticky top-0 z-10">
         <div className="max-w-md mx-auto px-4 py-4">
@@ -216,12 +182,7 @@ const Results = () => {
 
         {/* Only show details if not uncertain */}
         {!isUncertain && <>
-        {/* Ask an Expert Button */}
-        <div className="flex justify-end mb-2">
-          <Button variant="outline" onClick={() => setShowExpertModal(true)}>
-            Ask an Expert
-          </Button>
-        </div>
+
         {/* Symptoms */}
         <Card className="bg-white/70 backdrop-blur-sm border-green-200">
           <CardHeader>

@@ -7,7 +7,6 @@ const environments = {
   development: {
     name: 'Development',
     baseUrl: 'http://localhost:8090',
-    apiUrl: 'http://localhost:4000', // Updated to match backend
     features: {
       debug: true,
       analytics: false,
@@ -24,7 +23,6 @@ const environments = {
   staging: {
     name: 'Staging',
     baseUrl: 'https://staging.cropcare-ai.com',
-    apiUrl: 'https://api-staging.cropcare-ai.com',
     features: {
       debug: true,
       analytics: true,
@@ -41,7 +39,6 @@ const environments = {
   production: {
     name: 'Production',
     baseUrl: 'https://cropcare-ai.com',
-    apiUrl: 'https://api.cropcare-ai.com',
     features: {
       debug: false,
       analytics: true,
@@ -90,13 +87,6 @@ class DeploymentConfig {
    */
   getBaseUrl() {
     return this.config.baseUrl;
-  }
-
-  /**
-   * Get API URL for current environment
-   */
-  getApiUrl() {
-    return this.config.apiUrl;
   }
 
   /**
@@ -170,7 +160,6 @@ class DeploymentConfig {
   getDeploymentUrls() {
     return {
       app: this.config.baseUrl,
-      api: this.config.apiUrl,
       docs: `${this.config.baseUrl}/docs`,
       support: `${this.config.baseUrl}/support`
     };
@@ -182,7 +171,6 @@ class DeploymentConfig {
   getMonitoringConfig() {
     return {
       enabled: this.config.features.analytics,
-      endpoint: `${this.config.apiUrl}/analytics`,
       sampleRate: this.isProduction() ? 1.0 : 0.1
     };
   }
@@ -193,7 +181,6 @@ class DeploymentConfig {
   getErrorReportingConfig() {
     return {
       enabled: !this.isDevelopment(),
-      endpoint: `${this.config.apiUrl}/errors`,
       includeStackTraces: this.isDevelopment()
     };
   }

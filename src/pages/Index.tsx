@@ -5,6 +5,13 @@ import { Camera, History, Leaf, Smartphone, Shield, CheckCircle, Download, BarCh
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
+// Type for the PWA install prompt event
+type BeforeInstallPromptEvent = Event & {
+  readonly platforms: string[];
+  readonly userChoice: Promise<{ outcome: 'accepted' | 'dismissed', platform: string }>;
+  prompt(): Promise<void>;
+};
+
 const Index = () => {
   const [mounted, setMounted] = useState(false);
   const [showInstallButton, setShowInstallButton] = useState(false);
@@ -84,65 +91,73 @@ const Index = () => {
             <CardContent className="p-4 flex flex-col gap-2">
               <div className="flex items-center gap-2">
                 <Camera className="h-5 w-5 text-green-600" />
-                <span className="font-semibold text-gray-800">Real-time Disease Detection</span>
+                <h3 className="font-semibold text-gray-900">Instant Detection</h3>
               </div>
-              <p className="text-gray-600 text-sm">Snap a photo of your crops and receive instant AI-powered diagnosis and treatment recommendations.</p>
+              <p className="text-sm text-gray-600">AI-powered crop disease detection with instant results</p>
             </CardContent>
           </Card>
+
           <Card className="bg-white/90">
             <CardContent className="p-4 flex flex-col gap-2">
               <div className="flex items-center gap-2">
                 <Shield className="h-5 w-5 text-green-600" />
-                <span className="font-semibold text-gray-800">Offline Capability</span>
+                <h3 className="font-semibold text-gray-900">Offline Capable</h3>
               </div>
-              <p className="text-gray-600 text-sm">Works seamlessly in remote areas—no internet required for disease detection or history access.</p>
+              <p className="text-sm text-gray-600">Works without internet connection</p>
             </CardContent>
           </Card>
+
+          <Card className="bg-white/90">
+            <CardContent className="p-4 flex flex-col gap-2">
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-5 w-5 text-green-600" />
+                <h3 className="font-semibold text-gray-900">Accurate Results</h3>
+              </div>
+              <p className="text-sm text-gray-600">High-accuracy disease identification</p>
+            </CardContent>
+          </Card>
+
           <Card className="bg-white/90">
             <CardContent className="p-4 flex flex-col gap-2">
               <div className="flex items-center gap-2">
                 <BarChart2 className="h-5 w-5 text-green-600" />
-                <span className="font-semibold text-gray-800">Scan Analytics</span>
+                <h3 className="font-semibold text-gray-900">Treatment Plans</h3>
               </div>
-              <p className="text-gray-600 text-sm">Track your crop health over time with detailed analytics and visualizations. Monitor trends and make informed decisions for your farm.</p>
-            </CardContent>
-          </Card>
-          <Card className="bg-white/90">
-            <CardContent className="p-4 flex flex-col gap-2">
-              <div className="flex items-center gap-2">
-                <BarChart2 className="h-5 w-5 text-green-600" />
-                <span className="font-semibold text-gray-800">Comprehensive Insights</span>
-              </div>
-              <p className="text-gray-600 text-sm">Access detailed disease information, treatment plans, prevention tips, and scan analytics.</p>
+              <p className="text-sm text-gray-600">Detailed treatment recommendations</p>
             </CardContent>
           </Card>
         </div>
       </section>
 
-      {/* Global Impact Card */}
-      <div className="max-w-2xl mx-auto px-4 pb-8">
-        <div className="rounded-xl bg-green-50 p-8 flex flex-col items-center justify-center shadow" style={{ background: 'linear-gradient(90deg, #e6f9ee 0%, #f0fdf4 100%)' }}>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-12 w-12 text-green-700 mb-2">
-            <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none" />
-            <path stroke="currentColor" strokeWidth="2" d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" />
-          </svg>
-          <div className="text-2xl font-semibold text-green-800 mb-1">Global Impact</div>
+      {/* Install Prompt */}
+      {showInstallButton && (
+        <div className="fixed bottom-4 left-4 right-4 bg-white rounded-lg shadow-lg border border-green-200 p-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Download className="h-5 w-5 text-green-600" />
+              <div>
+                <p className="font-semibold text-gray-900">Install CropCare AI</p>
+                <p className="text-sm text-gray-600">Get quick access from your home screen</p>
+              </div>
+            </div>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setShowInstallButton(false)}
+                className="text-gray-600"
+              >
+                Not now
+              </Button>
+              <Button size="sm" onClick={handleInstallClick} className="bg-green-600 hover:bg-green-700">
+                Install
+              </Button>
+            </div>
+          </div>
         </div>
-      </div>
-
-      {/* Footer */}
-      <footer className="w-full flex flex-col items-center pb-6">
-        <div className="text-gray-500 text-sm mt-4">© 2025 CropCare AI — Empowering Farmers, Feeding the World</div>
-      </footer>
+      )}
     </div>
   );
-};
-
-// Type for the PWA install prompt event (not in standard TypeScript DOM lib)
-type BeforeInstallPromptEvent = Event & {
-  readonly platforms: string[];
-  readonly userChoice: Promise<{ outcome: 'accepted' | 'dismissed', platform: string }>;
-  prompt(): Promise<void>;
 };
 
 export default Index;

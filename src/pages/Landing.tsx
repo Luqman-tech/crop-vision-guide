@@ -9,8 +9,8 @@ const Landing: React.FC = () => {
   useEffect(() => {
     setFadeIn(true);
     const timer = setTimeout(() => {
-      navigate("/signin");
-    }, 5000); // 5 seconds
+      navigate("/home");
+    }, 3000); // 3 seconds
     return () => clearTimeout(timer);
   }, [navigate]);
 
@@ -24,7 +24,7 @@ const Landing: React.FC = () => {
               alt="CropCare AI Logo"
               style={{
                 opacity: fadeIn ? 1 : 0,
-                transition: "opacity 2s cubic-bezier(0.4, 0, 0.2, 1)",
+                transition: "opacity 1s cubic-bezier(0.4, 0, 0.2, 1)",
                 width: 200,
                 height: 'auto',
                 maxHeight: 200,
